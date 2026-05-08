@@ -1,0 +1,14 @@
+{
+  "name": "tume-cms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Directus CMS for Tume ya Utumishi Serikalini website",
+  "scripts": {
+    "start": "npx directus start",
+    "migrate": "node migrations/001_initial_schema.js",
+    "seed": "node seed/seed-data.js"
+  },
+  "dependencies": {
+    "directus": "^11.17.4"
+  }
+}

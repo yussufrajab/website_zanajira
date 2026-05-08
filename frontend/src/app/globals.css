@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #006b3f;
+  --color-primary-dark: #004d2e;
+  --color-primary-light: #e8f5ee;
+  --color-secondary: #c5922e;
+  --color-secondary-dark: #9e7524;
+  --color-secondary-light: #fdf5e6;
+  --color-accent: #003366;
+  --color-accent-dark: #002244;
+  --color-accent-light: #e6eef5;
+  --color-background: #ffffff;
+  --color-foreground: #1a1a2e;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-surface: #f9fafb;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-warning: #d97706;
+  --font-sans: "Inter", "Noto Sans", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.bg-accent a {
+  color: white;
+}
+
+.bg-accent a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+footer a:hover {
+  color: var(--color-secondary);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container-main {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-main {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-main {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

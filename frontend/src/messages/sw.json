@@ -1,0 +1,149 @@
+{
+  "site": {
+    "title": "Tume ya Utumishi Serikalini — Zanzibar",
+    "description": "Tovuti rasmi ya Tume ya Utumishi Serikalini (Civil Service Commission) — Zanzibar"
+  },
+  "nav": {
+    "home": "Mwanzo",
+    "about_us": "Kuhusu Sisi",
+    "introduction": "Utangulizi",
+    "mission_vision": "Dira na Dhamira",
+    "core_functions": "Kazi Msimgo",
+    "organization_structure": "Muundo wa Shirika",
+    "board": "Bodi",
+    "department": "Idara",
+    "unit_division": "Kitengo na Mgawanyiko",
+    "organization_chart": "Chati ya Shirika",
+    "our_service": "Huduma Yetu",
+    "contact_us": "Wasiliana Nasi",
+    "news": "Habari",
+    "vacancies": "Nafasi za Kazi",
+    "interviews": "Mwaliko wa Usaili",
+    "search": "Tafuta",
+    "search_placeholder": "Tafuta habari, nafasi za kazi, usaili..."
+  },
+  "top_bar": {
+    "zanajira_portal": "ZanAjira Portal",
+    "ajira_portal": "Ajira Portal - Tanzania"
+  },
+  "footer": {
+    "organization_info": "Tume ya Utumishi Serikalini — Zanzibar",
+    "organization_desc": "Taasisi huru iliyoanzishwa chini ya Sheria ya Tume ya Utumishi Serikalini Na. 14 ya 1986 na Katiba ya Zanzibar ya 1984.",
+    "staff_services": "Huduma kwa Watumishi",
+    "e_office": "e-Office",
+    "hrms": "HRMS",
+    "staff_mail": "Staff Mail",
+    "salary_claim": "Salary Claim",
+    "external_links": "Viungo vya Nje",
+    "useful_links": "Viungo vya Manufaa",
+    "copyright": "© {year} Tume ya Utumishi Serikalini — Zanzibar"
+  },
+  "home": {
+    "welcome_title": "Karibu",
+    "welcome_text": "Tume ya Utumishi Serikalini ni taasisi huru iliyoanzishwa chini ya Sheria ya Tume ya Utumishi Serikalini Na. 14 ya 1986 na Katiba ya Zanzibar ya 1984. Tume inajumuisha Mwenyekiti, Naibu Mwenyekiti, na Wanachama watano wote waliochaguliwa na Rais wa Zanzibar.",
+    "latest_news": "Habari Mpya",
+    "view_all_news": "Angalia Habari Zote",
+    "vacancy_announcements": "Tangazo la Nafasi za Kazi",
+    "view_all_vacancies": "Angalia Nafasi Zote",
+    "call_for_interviews": "Mwaliko wa Usaili",
+    "view_all_interviews": "Angalia Mwaliko Wote"
+  },
+  "news": {
+    "title": "Habari Mpya",
+    "read_more": "Soma Zaidi",
+    "download_pdf": "Pakua PDF",
+    "published_on": "Imechapishwa {date}",
+    "category": "Kategoria",
+    "filter_by_category": "Chuja kwa Kategoria",
+    "all_categories": "Kategoria Zote",
+    "search_news": "Tafuta habari...",
+    "no_results": "Hakuna habari zinazofanana na vigezo vyako."
+  },
+  "vacancies": {
+    "title": "Nafasi za Kazi",
+    "deadline": "Tarehe ya Mwisho",
+    "status_open": "Wazi",
+    "status_closed": "Imefungwa",
+    "filter_by_institution": "Chuja kwa Taasisi",
+    "filter_by_status": "Chuja kwa Hali",
+    "all_institutions": "Taasisi Zote",
+    "all_statuses": "Hali Zote",
+    "search_vacancies": "Tafuta nafasi za kazi...",
+    "no_results": "Hakuna nafasi za kazi zinazofanana na vigezo vyako.",
+    "download_pdf": "Pakua PDF"
+  },
+  "interviews": {
+    "title": "Mwaliko wa Usaili",
+    "type_written": "Andishi",
+    "type_face_to_face": "Ana kwa Ana",
+    "type_practical": "Vitendo",
+    "type_screening": "Uchunguzi",
+    "filter_by_institution": "Chuja kwa Taasisi",
+    "filter_by_type": "Chuja kwa Aina",
+    "all_institutions": "Taasisi Zote",
+    "all_types": "Aina Zote",
+    "search_interviews": "Tafuta mwaliko wa usaili...",
+    "no_results": "Hakuna mwaliko wa usaili unaoendana na vigezo vyako.",
+    "download_pdf": "Pakua PDF"
+  },
+  "search": {
+    "title": "Matokeo ya Utafutaji",
+    "placeholder": "Tafuta habari, nafasi za kazi, usaili...",
+    "results_for": "Matokeo ya \"{query}\"",
+    "no_results": "Hakuna matokeo ya \"{query}\"",
+    "news_results": "Matokeo ya Habari",
+    "vacancy_results": "Matokeo ya Nafasi za Kazi",
+    "interview_results": "Matokeo ya Mwaliko wa Usaili"
+  },
+  "contact": {
+    "title": "Wasiliana Nasi",
+    "phone": "Simu",
+    "email": "Barua Pepe",
+    "address": "Anwani",
+    "office_hours": "Saa za Ofisi",
+    "form_title": "Tutumie Ujumbe",
+    "name": "Jina Kamili",
+    "name_placeholder": "Andika jina lako kamili",
+    "email": "Barua Pepe",
+    "email_placeholder": "Andika barua pepe yako",
+    "subject": "Mada",
+    "subject_placeholder": "Andika mada",
+    "message": "Ujumbe",
+    "message_placeholder": "Andika ujumbe wako",
+    "submit": "Tuma Ujumbe",
+    "sending": "Inatuma...",
+    "success": "Ujumbe wako umetumwa kwa mafanikio. Tutakujibu hivi karibuni.",
+    "error": "Kuna hitilafu. Tafadhali jaribu tena baadaye.",
+    "name_required": "Jina kamili linahitajika",
+    "name_max": "Jina kamili lazima liwe herufi 100 au chini",
+    "email_required": "Barua pepe inahitajika",
+    "email_invalid": "Tafadhali andika barua pepe sahihi",
+    "subject_required": "Mada inahitajika",
+    "subject_max": "Mada lazima iwe herufi 200 au chini",
+    "message_required": "Ujumbe unahitajika",
+    "message_max": "Ujumbe lazima uwe herufi 2000 au chini"
+  },
+  "about": {
+    "introduction": "Utangulizi",
+    "mission_vision": "Dira na Dhamira",
+    "core_functions": "Kazi Msimgo"
+  },
+  "org_structure": {
+    "title": "Muundo wa Shirika",
+    "board": "Wanachama wa Bodi",
+    "department": "Idara",
+    "unit_division": "Vituo na Mgawanyiko",
+    "organization_chart": "Chati ya Shirika"
+  },
+  "services": {
+    "title": "Huduma Yetu"
+  },
+  "error": {
+    "404_title": "Ukurasa Haupatikani",
+    "404_message": "Ukurasa unaoutafuta haupo au umehamishwa.",
+    "500_title": "Hitilafu ya Seva",
+    "500_message": "Kuna tatizo katika seva yetu. Tafadhali jaribu tena baadaye.",
+    "go_home": "Rudi Mwanzo",
+    "search_suggestion": "Jaribu kutafuta unachohitaji:"
+  }
+}

@@ -1,0 +1,193 @@
+
+<style>
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .tier0 { animation: fadeIn .4s ease both; }
+  .tier1 { animation: fadeIn .5s .1s ease both; }
+  .tier2 { animation: fadeIn .6s .2s ease both; }
+  .tier3 { animation: fadeIn .7s .3s ease both; }
+  .tier4 { animation: fadeIn .8s .4s ease both; }
+</style>
+<svg width="100%" viewBox="0 0 680 900" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Civil Services Commission organisational chart</title>
+  <desc>Org chart from Civil Services Commission at the top, through the Secretary, six units, and three departments with sub-divisions plus Pemba Office</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <linearGradient id="hdrGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#534AB7"/>
+      <stop offset="100%" stop-color="#1D9E75"/>
+    </linearGradient>
+    <linearGradient id="secGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3C3489"/>
+      <stop offset="100%" stop-color="#085041"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ══ HEADER BANNER ══ -->
+  <g class="tier0">
+    <rect x="160" y="18" width="360" height="48" rx="12" fill="url(#hdrGrad)"/>
+    <text x="340" y="37" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#EEEDFE" font-family="var(--font-sans)">Civil Services Commission</text>
+    <text x="340" y="55" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#AFA9EC" font-family="var(--font-sans)">Zanzibar</text>
+  </g>
+
+  <!-- connector: header → secretary -->
+  <line x1="340" y1="66" x2="340" y2="96" stroke="#7F77DD" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- ══ SECRETARY ══ -->
+  <g class="tier1">
+    <rect x="215" y="96" width="250" height="50" rx="10" fill="url(#secGrad)" stroke="#AFA9EC" stroke-width="0.5"/>
+    <text x="340" y="115" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#EEEDFE" font-family="var(--font-sans)">Secretary</text>
+    <text x="340" y="133" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#9FE1CB" font-family="var(--font-sans)">Head of commission</text>
+  </g>
+
+  <!-- vertical spine from secretary -->
+  <line x1="340" y1="146" x2="340" y2="186" stroke="#7F77DD" stroke-width="1.5" fill="none"/>
+
+  <!-- ══ SIX UNITS — bracket on left of spine ══ -->
+  <!-- spine runs y=186 to y=438 -->
+  <line x1="340" y1="186" x2="340" y2="438" stroke="#7F77DD" stroke-width="1" fill="none"/>
+
+  <!-- Unit 1: Accounting -->
+  <g class="tier2 node" onclick="sendPrompt('Tell me about the Accounting unit')">
+    <rect x="148" y="192" width="168" height="34" rx="7" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text x="232" y="209" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="var(--font-sans)">Accounting unit</text>
+  </g>
+  <line x1="316" y1="209" x2="340" y2="209" stroke="#7F77DD" stroke-width="0.8" fill="none"/>
+
+  <!-- Unit 2: Procurement & Supply -->
+  <g class="tier2 node" onclick="sendPrompt('Tell me about the Procurement and Supply unit')">
+    <rect x="148" y="234" width="168" height="34" rx="7" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text x="232" y="251" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="var(--font-sans)">Procurement &amp; supply unit</text>
+  </g>
+  <line x1="316" y1="251" x2="340" y2="251" stroke="#7F77DD" stroke-width="0.8" fill="none"/>
+
+  <!-- Unit 3: Legal -->
+  <g class="tier2 node" onclick="sendPrompt('Tell me about the Legal unit')">
+    <rect x="148" y="276" width="168" height="34" rx="7" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text x="232" y="293" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="var(--font-sans)">Legal unit</text>
+  </g>
+  <line x1="316" y1="293" x2="340" y2="293" stroke="#7F77DD" stroke-width="0.8" fill="none"/>
+
+  <!-- Unit 4: Public Relations -->
+  <g class="tier2 node" onclick="sendPrompt('Tell me about the Public Relations unit')">
+    <rect x="148" y="318" width="168" height="34" rx="7" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text x="232" y="335" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="var(--font-sans)">Public relations unit</text>
+  </g>
+  <line x1="316" y1="335" x2="340" y2="335" stroke="#7F77DD" stroke-width="0.8" fill="none"/>
+
+  <!-- Unit 5: Information & Technology -->
+  <g class="tier2 node" onclick="sendPrompt('Tell me about the Information and Technology unit')">
+    <rect x="148" y="360" width="168" height="38" rx="7" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text x="232" y="373" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="var(--font-sans)">Information &amp;</text>
+    <text x="232" y="388" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="var(--font-sans)">technology unit</text>
+  </g>
+  <line x1="316" y1="379" x2="340" y2="379" stroke="#7F77DD" stroke-width="0.8" fill="none"/>
+
+  <!-- Unit 6: Internal Auditing — same level as others, connected to spine -->
+  <g class="tier2 node" onclick="sendPrompt('Tell me about the Internal Auditing unit')">
+    <rect x="148" y="406" width="168" height="34" rx="7" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text x="232" y="423" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="var(--font-sans)">Internal auditing unit</text>
+  </g>
+  <line x1="316" y1="423" x2="340" y2="423" stroke="#7F77DD" stroke-width="0.8" fill="none"/>
+
+  <!-- ══ HORIZONTAL SPINE TO DEPARTMENTS ══ -->
+  <line x1="340" y1="438" x2="340" y2="462" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+  <line x1="75" y1="462" x2="605" y2="462" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+
+  <!-- verticals down to 4 nodes -->
+  <line x1="75"  y1="462" x2="75"  y2="482" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+  <line x1="248" y1="462" x2="248" y2="482" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+  <line x1="432" y1="462" x2="432" y2="482" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+  <line x1="605" y1="462" x2="605" y2="482" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+
+  <!-- ══ DEPT 1: HR Administration & Planning ══ -->
+  <g class="tier3 node" onclick="sendPrompt('Tell me about the Department of Human Resources, Administration and Planning')">
+    <rect x="18" y="482" width="114" height="62" rx="9" fill="#085041" stroke="#5DCAA5" stroke-width="0.8"/>
+    <text x="75" y="499" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Dept of Human</text>
+    <text x="75" y="513" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Resources, Admin</text>
+    <text x="75" y="527" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">&amp; Planning</text>
+  </g>
+
+  <!-- ══ DEPT 2: HR Management ══ -->
+  <g class="tier3 node" onclick="sendPrompt('Tell me about the Department of Human Resource Management')">
+    <rect x="191" y="482" width="114" height="62" rx="9" fill="#085041" stroke="#5DCAA5" stroke-width="0.8"/>
+    <text x="248" y="499" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Dept of Human</text>
+    <text x="248" y="513" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Resource</text>
+    <text x="248" y="527" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Management</text>
+  </g>
+
+  <!-- ══ DEPT 3: Recruitment & Quality Control ══ -->
+  <g class="tier3 node" onclick="sendPrompt('Tell me about the Department of Recruitment and Quality Control')">
+    <rect x="375" y="482" width="114" height="62" rx="9" fill="#085041" stroke="#5DCAA5" stroke-width="0.8"/>
+    <text x="432" y="499" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Dept of</text>
+    <text x="432" y="513" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Recruitment &amp;</text>
+    <text x="432" y="527" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="500" fill="#9FE1CB" font-family="var(--font-sans)">Quality Control</text>
+  </g>
+
+  <!-- ══ PEMBA OFFICE ══ -->
+  <g class="tier3 node" onclick="sendPrompt('Tell me about the Pemba Office')">
+    <rect x="548" y="482" width="114" height="62" rx="9" fill="#3C3489" stroke="#AFA9EC" stroke-width="0.8"/>
+    <text x="605" y="506" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#EEEDFE" font-family="var(--font-sans)">Pemba</text>
+    <text x="605" y="522" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#AFA9EC" font-family="var(--font-sans)">office</text>
+  </g>
+
+  <!-- ══ SUB-DIVISIONS ══ -->
+
+  <!-- Dept 1 sub-divs -->
+  <line x1="75" y1="544" x2="75" y2="564" stroke="#1D9E75" stroke-width="0.8" fill="none"/>
+  <g class="tier4 node" onclick="sendPrompt('Tell me about the Division of HR and Administration')">
+    <rect x="18" y="564" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="75" y="579" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">Division: HR &amp;</text>
+    <text x="75" y="593" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">administration</text>
+  </g>
+  <line x1="75" y1="608" x2="75" y2="626" stroke="#1D9E75" stroke-width="0.8" fill="none"/>
+  <g class="tier4 node" onclick="sendPrompt('Tell me about the Division of Planning, Monitoring and Evaluation')">
+    <rect x="18" y="626" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="75" y="641" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">Division: planning,</text>
+    <text x="75" y="655" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#085041" font-family="var(--font-sans)">monitoring &amp; eval</text>
+  </g>
+
+  <!-- Dept 2 sub-divs -->
+  <line x1="248" y1="544" x2="248" y2="564" stroke="#1D9E75" stroke-width="0.8" fill="none"/>
+  <g class="tier4 node" onclick="sendPrompt('Tell me about the Division of Disciplinary Matters')">
+    <rect x="191" y="564" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="248" y="579" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">Division:</text>
+    <text x="248" y="593" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">disciplinary matters</text>
+  </g>
+  <line x1="248" y1="608" x2="248" y2="626" stroke="#1D9E75" stroke-width="0.8" fill="none"/>
+  <g class="tier4 node" onclick="sendPrompt('Tell me about the Division of Guideline Management')">
+    <rect x="191" y="626" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="248" y="641" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">Division: guideline</text>
+    <text x="248" y="655" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">management</text>
+  </g>
+
+  <!-- Dept 3 sub-divs -->
+  <line x1="432" y1="544" x2="432" y2="564" stroke="#1D9E75" stroke-width="0.8" fill="none"/>
+  <g class="tier4 node" onclick="sendPrompt('Tell me about the Division of Job Advertisement and Statistics')">
+    <rect x="375" y="564" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="432" y="579" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">Division: job ads</text>
+    <text x="432" y="593" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">&amp; statistics</text>
+  </g>
+  <line x1="432" y1="608" x2="432" y2="626" stroke="#1D9E75" stroke-width="0.8" fill="none"/>
+  <g class="tier4 node" onclick="sendPrompt('Tell me about the Division of Evaluation of Job Applicants')">
+    <rect x="375" y="626" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="432" y="641" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">Division: evaluation</text>
+    <text x="432" y="655" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#085041" font-family="var(--font-sans)">of job applicants</text>
+  </g>
+
+  <!-- ══ LEGEND ══ -->
+  <rect x="40" y="715" width="600" height="50" rx="8" fill="none" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.4"/>
+  <rect x="60" y="731" width="14" height="14" rx="3" fill="url(#hdrGrad)" opacity="0.9"/>
+  <text x="80" y="740" font-size="11" fill="var(--s)" font-family="var(--font-sans)" dominant-baseline="central">Commission</text>
+  <rect x="160" y="731" width="14" height="14" rx="3" fill="#534AB7" opacity="0.9"/>
+  <text x="180" y="740" font-size="11" fill="var(--s)" font-family="var(--font-sans)" dominant-baseline="central">Units</text>
+  <rect x="240" y="731" width="14" height="14" rx="3" fill="#085041" opacity="0.9"/>
+  <text x="260" y="740" font-size="11" fill="var(--s)" font-family="var(--font-sans)" dominant-baseline="central">Departments</text>
+  <rect x="370" y="731" width="14" height="14" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+  <text x="390" y="740" font-size="11" fill="var(--s)" font-family="var(--font-sans)" dominant-baseline="central">Sub-divisions</text>
+  <rect x="500" y="731" width="14" height="14" rx="3" fill="#3C3489" opacity="0.9"/>
+  <text x="520" y="740" font-size="11" fill="var(--s)" font-family="var(--font-sans)" dominant-baseline="central">Pemba office</text>
+
+  <text x="340" y="790" text-anchor="middle" font-size="11" fill="var(--t)" opacity="0.4" font-family="var(--font-sans)">tap any node to learn more</text>
+</svg>

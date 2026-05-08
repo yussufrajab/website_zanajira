@@ -1,0 +1,149 @@
+{
+  "site": {
+    "title": "Civil Service Commission — Zanzibar",
+    "description": "Official website of the Civil Service Commission (Tume ya Utumishi Serikalini) — Zanzibar"
+  },
+  "nav": {
+    "home": "Home",
+    "about_us": "About Us",
+    "introduction": "Introduction",
+    "mission_vision": "Mission & Vision",
+    "core_functions": "Core Functions",
+    "organization_structure": "Organization Structure",
+    "board": "Board",
+    "department": "Department",
+    "unit_division": "Unit & Division",
+    "organization_chart": "Organization Chart",
+    "our_service": "Our Service",
+    "contact_us": "Contact Us",
+    "news": "News",
+    "vacancies": "Vacancies",
+    "interviews": "Call for Interviews",
+    "search": "Search",
+    "search_placeholder": "Search news, vacancies, interviews..."
+  },
+  "top_bar": {
+    "zanajira_portal": "ZanAjira Portal",
+    "ajira_portal": "Ajira Portal - Tanzania"
+  },
+  "footer": {
+    "organization_info": "Civil Service Commission — Zanzibar",
+    "organization_desc": "An independent institution established under the Civil Service Commission Act No. 14 of 1986 and the Zanzibar Constitution of 1984.",
+    "staff_services": "Staff Services",
+    "e_office": "e-Office",
+    "hrms": "HRMS",
+    "staff_mail": "Staff Mail",
+    "salary_claim": "Salary Claim",
+    "external_links": "External Links",
+    "useful_links": "Useful Links",
+    "copyright": "© {year} Tume ya Utumishi Serikalini — Zanzibar"
+  },
+  "home": {
+    "welcome_title": "Welcome",
+    "welcome_text": "The Civil Service Commission is an independent institution established under the Civil Service Commission Act No. 14 of 1986 and the Zanzibar Constitution of 1984. The Commission comprises a Chairman, Vice Chairman, and five Members, all appointed by the President of Zanzibar.",
+    "latest_news": "Latest News",
+    "view_all_news": "View All News",
+    "vacancy_announcements": "Vacancy Announcements",
+    "view_all_vacancies": "View All Vacancies",
+    "call_for_interviews": "Call for Interviews",
+    "view_all_interviews": "View All Interviews"
+  },
+  "news": {
+    "title": "Latest News",
+    "read_more": "Read More",
+    "download_pdf": "Download PDF",
+    "published_on": "Published on {date}",
+    "category": "Category",
+    "filter_by_category": "Filter by Category",
+    "all_categories": "All Categories",
+    "search_news": "Search news...",
+    "no_results": "No news found matching your criteria."
+  },
+  "vacancies": {
+    "title": "Vacancy Announcements",
+    "deadline": "Deadline",
+    "status_open": "Open",
+    "status_closed": "Closed",
+    "filter_by_institution": "Filter by Institution",
+    "filter_by_status": "Filter by Status",
+    "all_institutions": "All Institutions",
+    "all_statuses": "All Statuses",
+    "search_vacancies": "Search vacancies...",
+    "no_results": "No vacancies found matching your criteria.",
+    "download_pdf": "Download PDF"
+  },
+  "interviews": {
+    "title": "Call for Interviews",
+    "type_written": "Written",
+    "type_face_to_face": "Face-to-Face",
+    "type_practical": "Practical",
+    "type_screening": "Screening",
+    "filter_by_institution": "Filter by Institution",
+    "filter_by_type": "Filter by Type",
+    "all_institutions": "All Institutions",
+    "all_types": "All Types",
+    "search_interviews": "Search interviews...",
+    "no_results": "No interview calls found matching your criteria.",
+    "download_pdf": "Download PDF"
+  },
+  "search": {
+    "title": "Search Results",
+    "placeholder": "Search news, vacancies, interviews...",
+    "results_for": "Results for \"{query}\"",
+    "no_results": "No results found for \"{query}\"",
+    "news_results": "News Results",
+    "vacancy_results": "Vacancy Results",
+    "interview_results": "Interview Results"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "office_hours": "Office Hours",
+    "form_title": "Send us a Message",
+    "name": "Full Name",
+    "name_placeholder": "Enter your full name",
+    "email": "Email Address",
+    "email_placeholder": "Enter your email address",
+    "subject": "Subject",
+    "subject_placeholder": "Enter the subject",
+    "message": "Message",
+    "message_placeholder": "Enter your message",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Your message has been sent successfully. We will get back to you soon.",
+    "error": "Something went wrong. Please try again later.",
+    "name_required": "Full name is required",
+    "name_max": "Full name must be 100 characters or less",
+    "email_required": "Email address is required",
+    "email_invalid": "Please enter a valid email address",
+    "subject_required": "Subject is required",
+    "subject_max": "Subject must be 200 characters or less",
+    "message_required": "Message is required",
+    "message_max": "Message must be 2000 characters or less"
+  },
+  "about": {
+    "introduction": "Introduction",
+    "mission_vision": "Mission & Vision",
+    "core_functions": "Core Functions"
+  },
+  "org_structure": {
+    "title": "Organization Structure",
+    "board": "Board Members",
+    "department": "Departments",
+    "unit_division": "Units & Divisions",
+    "organization_chart": "Organization Chart"
+  },
+  "services": {
+    "title": "Our Services"
+  },
+  "error": {
+    "404_title": "Page Not Found",
+    "404_message": "The page you are looking for does not exist or has been moved.",
+    "500_title": "Server Error",
+    "500_message": "Something went wrong on our end. Please try again later.",
+    "go_home": "Go to Home Page",
+    "search_suggestion": "Try searching for what you need:"
+  }
+}

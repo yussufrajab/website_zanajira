@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output
+frontend/.next/
+frontend/out/
+cms/.next/
+cms/dist/
+
+# Environment files with secrets
+frontend/.env.local
+cms/.env
+.env
+.env.local
+.env.production
+
+# Uploads & storage
+cms/uploads/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pm2-debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+*.Zone.Identifier
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Database dumps
+*.sql.gz
+*.sql
+
+# Temporary files
+tmp/
+temp/
+
+# Package lock files (optional — uncomment if you don't want to track them)
+# cms/package-lock.json
+# frontend/package-lock.json
