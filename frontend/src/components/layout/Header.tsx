@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { getPathname } from "@/lib/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SearchOverlay } from "./SearchOverlay";
+import Image from "next/image";
 import { Menu, X, ChevronDown, Search } from "lucide-react";
 
 function FacebookIcon({ size = 16 }: { size?: number }) {
@@ -128,14 +129,16 @@ export function Header() {
         <div className="container-main flex items-center justify-between py-3">
           {/* Logo */}
           <a href={localePath("/")} className="flex items-center gap-3 no-underline">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
-              CSC
-            </div>
-            <div className="hidden sm:block">
-              <div className="font-bold text-primary text-lg leading-tight">
-                Tume ya Utumishi
-              </div>
-              <div className="text-sm text-muted">Serikalini — Zanzibar</div>
+            <Image
+              src="/logo.png"
+              alt="Tume ya Utumishi Serikalini"
+              width={48}
+              height={28}
+              className="h-12 w-auto object-contain"
+              priority
+            />
+            <div className="hidden sm:block font-bold text-primary text-lg">
+              Tume ya Utumishi Serikalini
             </div>
           </a>
 

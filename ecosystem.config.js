@@ -4,10 +4,10 @@ module.exports = {
       name: "tume-frontend",
       script: "npm",
       args: "start",
-      cwd: "/opt/tume-web/frontend",
+      cwd: "/home/nextjstest/tume_web/frontend",
       env: {
         NODE_ENV: "production",
-        PORT: 3000,
+        PORT: 3009,
       },
       instances: 1,
       autorestart: true,
@@ -21,7 +21,7 @@ module.exports = {
       name: "tume-cms",
       script: "npx",
       args: "directus start",
-      cwd: "/opt/tume-web/cms",
+      cwd: "/home/nextjstest/tume_web/cms",
       env: {
         NODE_ENV: "production",
         PORT: 8055,

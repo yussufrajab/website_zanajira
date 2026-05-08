@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import { Mail, Phone } from "lucide-react";
 
 function FacebookIcon({ size = 18 }: { size?: number }) {
@@ -56,9 +57,18 @@ export async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Organization Info */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-secondary">
-              {t("footer.organization_info")}
-            </h3>
+            <div className="flex items-center gap-3 mb-4">
+              <Image
+                src="/logo.png"
+                alt="Tume ya Utumishi Serikalini"
+                width={40}
+                height={24}
+                className="h-10 w-auto object-contain"
+              />
+              <span className="text-lg font-bold text-secondary">
+                {t("footer.organization_info")}
+              </span>
+            </div>
             <p className="text-sm text-white/80 mb-4">
               {t("footer.organization_desc")}
             </p>
