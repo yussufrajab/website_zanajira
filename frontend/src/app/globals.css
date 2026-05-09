@@ -52,6 +52,17 @@ a:hover {
   text-decoration: underline;
 }
 
+.prose ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+  padding-left: 1.5rem !important;
+}
+
+.prose ol li::marker {
+  color: var(--color-primary) !important;
+  font-weight: 700 !important;
+}
+
 .container-main {
   width: 100%;
   max-width: 1200px;

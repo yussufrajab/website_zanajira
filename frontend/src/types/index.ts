@@ -136,6 +136,9 @@ export interface ContactSubmission {
   message: string;
   created_at: string;
   is_read: boolean;
+  status: "new" | "replied" | "closed";
+  reply_message: string | null;
+  reply_sent_at: string | null;
 }
 
 export interface SiteSetting {

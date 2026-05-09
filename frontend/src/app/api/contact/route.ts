@@ -86,17 +86,33 @@ export async function POST(request: NextRequest) {
       email: sanitize(email),
       subject: sanitize(subject),
       message: sanitize(message),
+      status: "new" as const,
     };
 
-    // Submit to Directus
+    // Submit to Directus — authenticate first to get a valid admin token
     const directusUrl = process.env.DIRECTUS_URL || "http://localhost:8055";
-    const directusToken = process.env.DIRECTUS_API_TOKEN || "";
+    const adminEmail = process.env.DIRECTUS_ADMIN_EMAIL || "";
+    const adminPassword = process.env.DIRECTUS_ADMIN_PASSWORD || "";
+
+    // Get an admin access token via login
+    const authResponse = await fetch(`${directusUrl}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: adminEmail, password: adminPassword }),
+    });
+
+    if (!authResponse.ok) {
+      throw new Error(`Directus auth error: ${authResponse.status}`);
+    }
+
+    const authData = await authResponse.json();
+    const accessToken = authData.data.access_token;
 
     const response = await fetch(`${directusUrl}/items/contact_submissions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${directusToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(submission),
     });

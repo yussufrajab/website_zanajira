@@ -9,6 +9,7 @@
     "seed": "node seed/seed-data.js"
   },
   "dependencies": {
-    "directus": "^11.17.4"
+    "directus": "^11.17.4",
+    "nodemailer": "^8.0.5"
   }
 }
