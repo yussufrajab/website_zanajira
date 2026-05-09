@@ -6,7 +6,7 @@ import { getPathname } from "@/lib/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SearchOverlay } from "./SearchOverlay";
 import Image from "next/image";
-import { Menu, X, ChevronDown, Search } from "lucide-react";
+import { Menu, X, ChevronDown, Search, Phone, Mail } from "lucide-react";
 
 function FacebookIcon({ size = 16 }: { size?: number }) {
   return (
@@ -92,21 +92,13 @@ export function Header() {
       <div className="bg-accent text-white text-sm">
         <div className="container-main flex items-center justify-between py-2">
           <div className="flex items-center gap-4">
-            <a
-              href="https://portal.zanajira.go.tz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:underline hover:text-white/90"
-            >
-              {t("top_bar.zanajira_portal")}
+            <a href="tel:+255773101012" className="flex items-center gap-1.5 text-white hover:text-white/90 no-underline">
+              <Phone size={14} />
+              +255-773-101012
             </a>
-            <a
-              href="https://ajira.go.tz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:underline hover:text-white/90"
-            >
-              {t("top_bar.ajira_portal")}
+            <a href="mailto:info@zanajira.go.tz" className="flex items-center gap-1.5 text-white hover:text-white/90 no-underline">
+              <Mail size={14} />
+              info@zanajira.go.tz
             </a>
           </div>
           <div className="flex items-center gap-4">
@@ -175,8 +167,8 @@ export function Header() {
             )}
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-2">
+          {/* Actions + Flag */}
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setSearchOpen(true)}
               className="p-2 hover:bg-surface rounded-full"
@@ -191,6 +183,11 @@ export function Header() {
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
+            <img
+              src="/flag.gif"
+              alt="Zanzibar Flag"
+              className="h-10 w-auto object-contain"
+            />
           </div>
         </div>
 

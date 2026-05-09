@@ -28,3 +28,12 @@ export function slugify(text: string): string {
     .replace(/-+/g, "-")
     .trim();
 }
+
+export function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, "").trim();
+}
+
+export function matchesSearch(text: string | null | undefined, query: string): boolean {
+  if (!text) return false;
+  return stripHtml(text).toLowerCase().includes(query);
+}
