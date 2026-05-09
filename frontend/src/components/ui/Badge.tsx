@@ -10,7 +10,7 @@ type BadgeProps = {
 
 const variantStyles: Record<BadgeVariant, string> = {
   default: "bg-surface text-muted border-border",
-  success: "bg-green-50 text-success border-green-200",
+  success: "bg-primary-light text-success border-primary-light",
   warning: "bg-yellow-50 text-warning border-yellow-200",
   error: "bg-red-50 text-error border-red-200",
 };

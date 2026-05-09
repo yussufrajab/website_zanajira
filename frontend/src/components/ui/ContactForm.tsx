@@ -77,7 +77,7 @@ export function ContactForm() {
         <div
           className={`p-4 rounded-lg ${
             result.success
-              ? "bg-green-50 text-success border border-green-200"
+              ? "bg-primary-light text-success border border-primary-light"
               : "bg-red-50 text-error border border-red-200"
           }`}
         >

@@ -48,11 +48,11 @@ export default async function OrganizationChartPage({ params }: Props) {
             </marker>
             <linearGradient id="hdrGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#534AB7"/>
-              <stop offset="100%" stopColor="#1D9E75"/>
+              <stop offset="100%" stopColor="#1b5e20"/>
             </linearGradient>
             <linearGradient id="secGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#3C3489"/>
-              <stop offset="100%" stopColor="#085041"/>
+              <stop offset="100%" stopColor="#0e3b12"/>
             </linearGradient>
           </defs>
 
@@ -76,7 +76,7 @@ export default async function OrganizationChartPage({ params }: Props) {
             <text x="340" y="115" textAnchor="middle" dominantBaseline="central" fontSize="14" fontWeight="500" fill="#EEEDFE" fontFamily="var(--font-sans)">
               {isSw ? "Katibu" : "Secretary"}
             </text>
-            <text x="340" y="133" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <text x="340" y="133" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Mkuu wa Tume" : "Head of commission"}
             </text>
           </g>
@@ -121,53 +121,53 @@ export default async function OrganizationChartPage({ params }: Props) {
           })}
 
           {/* HORIZONTAL SPINE TO DEPARTMENTS */}
-          <line x1="340" y1="438" x2="340" y2="462" stroke="#1D9E75" strokeWidth="1.5" fill="none"/>
-          <line x1="75" y1="462" x2="605" y2="462" stroke="#1D9E75" strokeWidth="1.5" fill="none"/>
+          <line x1="340" y1="438" x2="340" y2="462" stroke="#1b5e20" strokeWidth="1.5" fill="none"/>
+          <line x1="75" y1="462" x2="605" y2="462" stroke="#1b5e20" strokeWidth="1.5" fill="none"/>
 
           {/* verticals down to 4 nodes */}
-          <line x1="75" y1="462" x2="75" y2="482" stroke="#1D9E75" strokeWidth="1.5" fill="none"/>
-          <line x1="248" y1="462" x2="248" y2="482" stroke="#1D9E75" strokeWidth="1.5" fill="none"/>
-          <line x1="432" y1="462" x2="432" y2="482" stroke="#1D9E75" strokeWidth="1.5" fill="none"/>
-          <line x1="605" y1="462" x2="605" y2="482" stroke="#1D9E75" strokeWidth="1.5" fill="none"/>
+          <line x1="75" y1="462" x2="75" y2="482" stroke="#1b5e20" strokeWidth="1.5" fill="none"/>
+          <line x1="248" y1="462" x2="248" y2="482" stroke="#1b5e20" strokeWidth="1.5" fill="none"/>
+          <line x1="432" y1="462" x2="432" y2="482" stroke="#1b5e20" strokeWidth="1.5" fill="none"/>
+          <line x1="605" y1="462" x2="605" y2="482" stroke="#1b5e20" strokeWidth="1.5" fill="none"/>
 
           {/* DEPT 1: HR Administration & Planning */}
           <g>
-            <rect x="18" y="482" width="114" height="62" rx="9" fill="#085041" stroke="#5DCAA5" strokeWidth="0.8"/>
-            <text x="75" y="499" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <rect x="18" y="482" width="114" height="62" rx="9" fill="#0e3b12" stroke="#2e8d3e" strokeWidth="0.8"/>
+            <text x="75" y="499" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Idara ya" : "Dept of Human"}
             </text>
-            <text x="75" y="513" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <text x="75" y="513" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Rasilimali Watu," : "Resources, Admin"}
             </text>
-            <text x="75" y="527" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <text x="75" y="527" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Utawala & Mipango" : "& Planning"}
             </text>
           </g>
 
           {/* DEPT 2: HR Management */}
           <g>
-            <rect x="191" y="482" width="114" height="62" rx="9" fill="#085041" stroke="#5DCAA5" strokeWidth="0.8"/>
-            <text x="248" y="499" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <rect x="191" y="482" width="114" height="62" rx="9" fill="#0e3b12" stroke="#2e8d3e" strokeWidth="0.8"/>
+            <text x="248" y="499" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Idara ya" : "Dept of Human"}
             </text>
-            <text x="248" y="513" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <text x="248" y="513" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Usimamizi wa" : "Resource"}
             </text>
-            <text x="248" y="527" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <text x="248" y="527" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Rasilimali Watu" : "Management"}
             </text>
           </g>
 
           {/* DEPT 3: Recruitment & Quality Control */}
           <g>
-            <rect x="375" y="482" width="114" height="62" rx="9" fill="#085041" stroke="#5DCAA5" strokeWidth="0.8"/>
-            <text x="432" y="499" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <rect x="375" y="482" width="114" height="62" rx="9" fill="#0e3b12" stroke="#2e8d3e" strokeWidth="0.8"/>
+            <text x="432" y="499" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Idara ya" : "Dept of"}
             </text>
-            <text x="432" y="513" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <text x="432" y="513" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Uteuzi &" : "Recruitment &"}
             </text>
-            <text x="432" y="527" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#9FE1CB" fontFamily="var(--font-sans)">
+            <text x="432" y="527" textAnchor="middle" dominantBaseline="central" fontSize="10.5" fontWeight="500" fill="#a5d6a7" fontFamily="var(--font-sans)">
               {isSw ? "Udhibiti wa Ubora" : "Quality Control"}
             </text>
           </g>
@@ -186,67 +186,67 @@ export default async function OrganizationChartPage({ params }: Props) {
           {/* SUB-DIVISIONS */}
 
           {/* Dept 1 sub-divs */}
-          <line x1="75" y1="544" x2="75" y2="564" stroke="#1D9E75" strokeWidth="0.8" fill="none"/>
+          <line x1="75" y1="544" x2="75" y2="564" stroke="#1b5e20" strokeWidth="0.8" fill="none"/>
           <g>
-            <rect x="18" y="564" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" strokeWidth="0.5"/>
-            <text x="75" y="579" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <rect x="18" y="564" width="114" height="44" rx="7" fill="#e8f5e9" stroke="#1b5e20" strokeWidth="0.5"/>
+            <text x="75" y="579" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Mgawanyiko:" : "Division: HR &"}
             </text>
-            <text x="75" y="593" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <text x="75" y="593" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Rasilimali Watu & Utawala" : "administration"}
             </text>
           </g>
-          <line x1="75" y1="608" x2="75" y2="626" stroke="#1D9E75" strokeWidth="0.8" fill="none"/>
+          <line x1="75" y1="608" x2="75" y2="626" stroke="#1b5e20" strokeWidth="0.8" fill="none"/>
           <g>
-            <rect x="18" y="626" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" strokeWidth="0.5"/>
-            <text x="75" y="641" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <rect x="18" y="626" width="114" height="44" rx="7" fill="#e8f5e9" stroke="#1b5e20" strokeWidth="0.5"/>
+            <text x="75" y="641" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Mgawanyiko:" : "Division: planning,"}
             </text>
-            <text x="75" y="655" textAnchor="middle" dominantBaseline="central" fontSize="10" fill="#085041" fontFamily="var(--font-sans)">
+            <text x="75" y="655" textAnchor="middle" dominantBaseline="central" fontSize="10" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Mipango, Ufuatiliaji & Tathmini" : "monitoring & eval"}
             </text>
           </g>
 
           {/* Dept 2 sub-divs */}
-          <line x1="248" y1="544" x2="248" y2="564" stroke="#1D9E75" strokeWidth="0.8" fill="none"/>
+          <line x1="248" y1="544" x2="248" y2="564" stroke="#1b5e20" strokeWidth="0.8" fill="none"/>
           <g>
-            <rect x="191" y="564" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" strokeWidth="0.5"/>
-            <text x="248" y="579" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <rect x="191" y="564" width="114" height="44" rx="7" fill="#e8f5e9" stroke="#1b5e20" strokeWidth="0.5"/>
+            <text x="248" y="579" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Mgawanyiko:" : "Division:"}
             </text>
-            <text x="248" y="593" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <text x="248" y="593" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Masuala ya Nidhamu" : "disciplinary matters"}
             </text>
           </g>
-          <line x1="248" y1="608" x2="248" y2="626" stroke="#1D9E75" strokeWidth="0.8" fill="none"/>
+          <line x1="248" y1="608" x2="248" y2="626" stroke="#1b5e20" strokeWidth="0.8" fill="none"/>
           <g>
-            <rect x="191" y="626" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" strokeWidth="0.5"/>
-            <text x="248" y="641" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <rect x="191" y="626" width="114" height="44" rx="7" fill="#e8f5e9" stroke="#1b5e20" strokeWidth="0.5"/>
+            <text x="248" y="641" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Mgawanyiko:" : "Division: guideline"}
             </text>
-            <text x="248" y="655" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <text x="248" y="655" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Miongozo ya Utawala" : "management"}
             </text>
           </g>
 
           {/* Dept 3 sub-divs */}
-          <line x1="432" y1="544" x2="432" y2="564" stroke="#1D9E75" strokeWidth="0.8" fill="none"/>
+          <line x1="432" y1="544" x2="432" y2="564" stroke="#1b5e20" strokeWidth="0.8" fill="none"/>
           <g>
-            <rect x="375" y="564" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" strokeWidth="0.5"/>
-            <text x="432" y="579" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <rect x="375" y="564" width="114" height="44" rx="7" fill="#e8f5e9" stroke="#1b5e20" strokeWidth="0.5"/>
+            <text x="432" y="579" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Mgawanyiko:" : "Division: job ads"}
             </text>
-            <text x="432" y="593" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <text x="432" y="593" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Tangazo la Ajira & Takwimu" : "& statistics"}
             </text>
           </g>
-          <line x1="432" y1="608" x2="432" y2="626" stroke="#1D9E75" strokeWidth="0.8" fill="none"/>
+          <line x1="432" y1="608" x2="432" y2="626" stroke="#1b5e20" strokeWidth="0.8" fill="none"/>
           <g>
-            <rect x="375" y="626" width="114" height="44" rx="7" fill="#E1F5EE" stroke="#0F6E56" strokeWidth="0.5"/>
-            <text x="432" y="641" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <rect x="375" y="626" width="114" height="44" rx="7" fill="#e8f5e9" stroke="#1b5e20" strokeWidth="0.5"/>
+            <text x="432" y="641" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Mgawanyiko:" : "Division: evaluation"}
             </text>
-            <text x="432" y="655" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#085041" fontFamily="var(--font-sans)">
+            <text x="432" y="655" textAnchor="middle" dominantBaseline="central" fontSize="11" fill="#0e3b12" fontFamily="var(--font-sans)">
               {isSw ? "Tathmini ya Wagombea" : "of job applicants"}
             </text>
           </g>
@@ -261,11 +261,11 @@ export default async function OrganizationChartPage({ params }: Props) {
           <text x="180" y="735" fontSize="11" fill="#666" fontFamily="var(--font-sans)" dominantBaseline="central">
             {isSw ? "Vitengo" : "Units"}
           </text>
-          <rect x="240" y="726" width="14" height="14" rx="3" fill="#085041" opacity="0.9"/>
+          <rect x="240" y="726" width="14" height="14" rx="3" fill="#0e3b12" opacity="0.9"/>
           <text x="260" y="735" fontSize="11" fill="#666" fontFamily="var(--font-sans)" dominantBaseline="central">
             {isSw ? "Idara" : "Departments"}
           </text>
-          <rect x="370" y="726" width="14" height="14" rx="3" fill="#E1F5EE" stroke="#0F6E56" strokeWidth="0.8"/>
+          <rect x="370" y="726" width="14" height="14" rx="3" fill="#e8f5e9" stroke="#1b5e20" strokeWidth="0.8"/>
           <text x="390" y="735" fontSize="11" fill="#666" fontFamily="var(--font-sans)" dominantBaseline="central">
             {isSw ? "Mgawanyiko" : "Sub-divisions"}
           </text>

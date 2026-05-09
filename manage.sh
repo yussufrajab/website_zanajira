@@ -39,7 +39,7 @@ POSTGRES_PORT=5432
 MINIO_PORT=9000
 MINIO_CONSOLE_PORT=9001
 CMS_PORT=8055
-FRONTEND_PORT=3000
+FRONTEND_PORT=3009
 
 # =============================================================================
 # LOG FILES
@@ -453,14 +453,43 @@ is_frontend_running() {
 start_frontend() {
     log_info "Starting frontend on port $FRONTEND_PORT [$(mode_label)]..."
 
-    ensure_port_free "$FRONTEND_PORT" "Frontend"
-    [ $? -ne 0 ] && return 1
+    # Aggressively free port 3009 — kill anything using it
+    if port_is_open "$FRONTEND_PORT"; then
+        log_warning "Frontend port $FRONTEND_PORT is occupied — killing all processes on it..."
+        # Kill by multiple methods to be thorough
+        fuser -k "$FRONTEND_PORT/tcp" 2>/dev/null || true
+        lsof -ti:$FRONTEND_PORT 2>/dev/null | xargs kill -9 2>/dev/null || true
+        pkill -9 -f "next dev" 2>/dev/null || true
+        pkill -9 -f "next start" 2>/dev/null || true
+        pkill -9 -f "next-server" 2>/dev/null || true
+        sleep 1
+        # If still occupied, force harder
+        if port_is_open "$FRONTEND_PORT"; then
+            pid=$(port_pid "$FRONTEND_PORT")
+            if [ -n "$pid" ]; then
+                kill -9 "$pid" 2>/dev/null || sudo kill -9 "$pid" 2>/dev/null
+            fi
+            fuser -k "$FRONTEND_PORT/tcp" 2>/dev/null || sudo fuser -k "$FRONTEND_PORT/tcp" 2>/dev/null
+            sleep 1
+        fi
+        if port_is_open "$FRONTEND_PORT"; then
+            log_error "Cannot free port $FRONTEND_PORT — aborting frontend start"
+            return 1
+        fi
+        log_success "Port $FRONTEND_PORT freed"
+    fi
+
+    # Also stop any PM2-managed frontend process
+    if command -v pm2 &>/dev/null && pm2 describe tume-frontend >/dev/null 2>&1; then
+        pm2 stop tume-frontend 2>/dev/null || true
+        pm2 delete tume-frontend 2>/dev/null || true
+    fi
 
     mkdir -p "$LOG_DIR"
 
     if is_dev; then
         cd "$APP_DIR/frontend"
-        nohup npm run dev > "$FRONTEND_LOG" 2>&1 < /dev/null &
+        PORT=$FRONTEND_PORT nohup npm run dev -- -p $FRONTEND_PORT > "$FRONTEND_LOG" 2>&1 < /dev/null &
         disown
     else
         # Production: build first if needed
@@ -472,10 +501,10 @@ start_frontend() {
 
         if command -v pm2 &>/dev/null; then
             cd "$APP_DIR"
-            pm2 start "npm start" --name tume-frontend --cwd "$APP_DIR/frontend"
+            PORT=$FRONTEND_PORT pm2 start "npx next start -p $FRONTEND_PORT" --name tume-frontend --cwd "$APP_DIR/frontend"
         else
             cd "$APP_DIR/frontend"
-            NODE_ENV=production nohup npx next start > "$FRONTEND_LOG" 2>&1 < /dev/null &
+            PORT=$FRONTEND_PORT NODE_ENV=production nohup npx next start -p $FRONTEND_PORT > "$FRONTEND_LOG" 2>&1 < /dev/null &
             disown
         fi
     fi
@@ -600,6 +629,9 @@ start_prod_apps_pm2() {
     log_info "Killing processes on ports $CMS_PORT and $FRONTEND_PORT..."
     fuser -k "$CMS_PORT/tcp" 2>/dev/null || true
     fuser -k "$FRONTEND_PORT/tcp" 2>/dev/null || true
+    pkill -f "next dev" 2>/dev/null || true
+    pkill -f "next start" 2>/dev/null || true
+    pkill -f "next-server" 2>/dev/null || true
     sleep 1
 
     # Delete old PM2 processes
@@ -643,6 +675,9 @@ start_dev_apps() {
     log_info "Killing processes on ports $CMS_PORT and $FRONTEND_PORT..."
     fuser -k "$CMS_PORT/tcp" 2>/dev/null || true
     fuser -k "$FRONTEND_PORT/tcp" 2>/dev/null || true
+    pkill -f "next dev" 2>/dev/null || true
+    pkill -f "next start" 2>/dev/null || true
+    pkill -f "next-server" 2>/dev/null || true
     sleep 1
 
     ensure_port_free "$CMS_PORT" "CMS"

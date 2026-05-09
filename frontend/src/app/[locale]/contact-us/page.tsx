@@ -141,10 +141,6 @@ export default async function ContactUsPage({ params }: Props) {
             </p>
           </div>
 
-          {/* Map placeholder */}
-          <div className="bg-surface rounded-lg border border-border h-48 flex items-center justify-center text-muted">
-            <p>{locale === "sw" ? "Ramani itawekwa hapa" : "Map will be embedded here"}</p>
-          </div>
         </div>
 
         {/* Contact Form */}
@@ -154,6 +150,23 @@ export default async function ContactUsPage({ params }: Props) {
           </h2>
           <ContactForm />
         </div>
+      </div>
+
+      {/* Map */}
+      <h2 className="text-xl font-semibold mb-4 mt-8">
+        {locale === "sw" ? "Ramani" : "Our Location"}
+      </h2>
+      <div className="rounded-lg overflow-hidden border border-border" style={{ height: "500px" }}>
+        <iframe
+          title={locale === "sw" ? "Ramani ya Tume ya Utumishi Serikalini" : "Civil Services Commission map"}
+          src="https://www.openstreetmap.org/export/embed.html?bbox=39.1813%2C-6.1874%2C39.2113%2C-6.1574&amp;layer=mapnik&amp;marker=-6.172499%2C39.196325"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
     </div>
   );
