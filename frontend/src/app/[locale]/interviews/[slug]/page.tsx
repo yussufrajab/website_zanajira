@@ -2,12 +2,9 @@ import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Badge } from "@/components/ui/Badge";
-import { fetchItems } from "@/lib/directus";
-import { getLocalizedField, Locale } from "@/lib/directus";
+import { fetchItems, getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
 import { formatDate } from "@/lib/utils";
 import type { Interview } from "@/types";
-
-const DIRECTUS_URL = process.env.DIRECTUS_URL || "http://localhost:8055";
 
 const interviewTypeLabels: Record<string, { sw: string; en: string }> = {
   written: { sw: "Andishi", en: "Written" },
@@ -83,7 +80,7 @@ export default async function InterviewDetailPage({ params }: Props) {
         {interview.pdf_document && (
           <div className="mt-8 p-4 bg-primary/10 rounded-lg">
             <a
-              href={`${DIRECTUS_URL}/assets/${interview.pdf_document}`}
+              href={`${PUBLIC_DIRECTUS_URL}/assets/${interview.pdf_document}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark no-underline"

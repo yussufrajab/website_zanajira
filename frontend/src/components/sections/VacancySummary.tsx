@@ -2,10 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { formatDate } from "@/lib/utils";
-import { getLocalizedField, Locale } from "@/lib/directus";
+import { getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
 import type { Vacancy } from "@/types";
-
-const DIRECTUS_URL = process.env.DIRECTUS_URL || "http://localhost:8055";
 
 type Props = {
   items: Vacancy[];
@@ -62,7 +60,7 @@ export async function VacancySummary({ items, locale }: Props) {
                 <div className="flex items-center gap-3 shrink-0 ml-4">
                   {item.pdf_document && (
                     <a
-                      href={`${DIRECTUS_URL}/assets/${item.pdf_document}`}
+                      href={`${PUBLIC_DIRECTUS_URL}/assets/${item.pdf_document}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline"

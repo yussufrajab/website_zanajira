@@ -1,11 +1,9 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Badge } from "@/components/ui/Badge";
-import { fetchItems, getLocalizedField, Locale } from "@/lib/directus";
+import { fetchItems, getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
 import { formatDate, matchesSearch } from "@/lib/utils";
 import type { NewsItem, Vacancy, Interview } from "@/types";
-
-const DIRECTUS_URL = process.env.DIRECTUS_URL || "http://localhost:8055";
 
 const interviewTypeLabels: Record<string, { sw: string; en: string }> = {
   written: { sw: "Andishi", en: "Written" },
@@ -206,7 +204,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
                       <div className="flex items-center gap-3 shrink-0">
                         {item.pdf_document && (
                           <a
-                            href={`${DIRECTUS_URL}/assets/${item.pdf_document}`}
+                            href={`${PUBLIC_DIRECTUS_URL}/assets/${item.pdf_document}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline"
@@ -255,7 +253,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
                         <div className="flex items-center gap-3 shrink-0">
                           {item.pdf_document && (
                             <a
-                              href={`${DIRECTUS_URL}/assets/${item.pdf_document}`}
+                              href={`${PUBLIC_DIRECTUS_URL}/assets/${item.pdf_document}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline"

@@ -3,6 +3,10 @@ import { createDirectus, rest, staticToken, readItem, readItems } from "@directu
 const DIRECTUS_URL = process.env.DIRECTUS_URL || "http://localhost:8055";
 const DIRECTUS_TOKEN = process.env.DIRECTUS_API_TOKEN || "";
 
+// Public URL for client-side asset links (PDFs, images served via nginx proxy)
+export const PUBLIC_DIRECTUS_URL =
+  process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://usajili.work.gd";
+
 export const directus = createDirectus(DIRECTUS_URL)
   .with(staticToken(DIRECTUS_TOKEN))
   .with(rest());
