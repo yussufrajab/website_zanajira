@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         hostname: "zanajira.go.tz",
       },
       {
+        protocol: "https",
+        hostname: "tume.work.gd",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
       },
