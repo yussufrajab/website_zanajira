@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { formatDate, generateExcerpt } from "@/lib/utils";
-import { getLocalizedField, Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 import type { NewsItem, NewsCategory } from "@/types";
 
 type Props = {

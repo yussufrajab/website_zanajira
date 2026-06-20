@@ -1,9 +1,10 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Badge } from "@/components/ui/Badge";
-import { fetchItems, getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 import { formatDate } from "@/lib/utils";
 import type { Vacancy } from "@/types";
+import { listVacancies } from "@/lib/content";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -20,13 +21,24 @@ export default async function VacanciesPage({ params, searchParams }: Props) {
 
   let vacancies: Vacancy[] = [];
   try {
-    vacancies = await fetchItems("vacancies", {
-      filter: { status: { _eq: "published" } },
-      sort: ["-date_posted"],
-      limit: 50,
-    }) as Vacancy[];
+    const status =
+      filters.status === "closed"
+        ? "closed" as const
+        : filters.status === "open"
+          ? ("published" as const)
+          : ("published" as const);
+    vacancies = await listVacancies({ status, limit: 50 });
   } catch {
     vacancies = [];
+  }
+
+  // For "closed" we already filtered at DB level; for default listing the DB
+  // returns only published, so the client-side closed filter below is a no-op
+  // (kept to preserve the original behaviour for a combined listing).
+  if (filters.status === "closed") {
+    vacancies = vacancies.filter((v) => v.status === "closed");
+  } else if (filters.status === "open") {
+    vacancies = vacancies.filter((v) => v.status === "published");
   }
 
   // Apply search filter if provided
@@ -39,12 +51,6 @@ export default async function VacanciesPage({ params, searchParams }: Props) {
         v.institution_en?.toLowerCase().includes(q) ||
         v.institution_sw?.toLowerCase().includes(q)
     );
-  }
-
-  if (filters.status === "closed") {
-    vacancies = vacancies.filter((v) => v.status === "closed");
-  } else if (filters.status === "open") {
-    vacancies = vacancies.filter((v) => v.status === "published");
   }
 
   return (
@@ -112,7 +118,7 @@ export default async function VacanciesPage({ params, searchParams }: Props) {
                 <div className="flex items-center gap-3 shrink-0">
                   {item.pdf_document && (
                     <a
-                      href={`${PUBLIC_DIRECTUS_URL}/assets/${item.pdf_document}`}
+                      href={item.pdf_document}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline"

@@ -17,22 +17,7 @@ module.exports = {
       merge_logs: true,
       log_date_format: "YYYY-MM-DD HH:mm:ss Z",
     },
-    {
-      name: "tume-cms",
-      script: "npx",
-      args: "directus start",
-      cwd: "/home/nextjstest/tume_web/cms",
-      env: {
-        NODE_ENV: "production",
-        PORT: 8055,
-      },
-      instances: 1,
-      autorestart: true,
-      max_memory_restart: "512M",
-      error_file: "/var/log/tume-web/cms-error.log",
-      out_file: "/var/log/tume-web/cms-out.log",
-      merge_logs: true,
-      log_date_format: "YYYY-MM-DD HH:mm:ss Z",
-    },
+    // Directus (tume-cms) has been decommissioned — the Next.js app now
+    // serves the admin UI and API directly (see /docs/DIRECTUS_TO_NEXTJS_API_MIGRATION_PLAN.md).
   ],
 };

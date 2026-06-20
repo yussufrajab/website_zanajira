@@ -11,15 +11,14 @@
 set -euo pipefail
 
 # Configuration
-FRONTEND_URL="http://localhost:3000"
-CMS_URL="http://localhost:8055"
-MINIO_URL="http://localhost:9000"
+FRONTEND_URL="http://localhost:3009"
 ALERT_EMAIL="admin@zanajira.go.tz"
 LOG_FILE="/var/log/tume-web/healthcheck.log"
 
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
 NC='\033[0m'
 
 FAILED=0
@@ -62,13 +61,11 @@ log "========================================="
 
 # Check processes
 check_process "next"
-check_process "directus"
-check_process "minio"
+# (Directus and MinIO have been decommissioned — admin UI/API now live in the
+# Next.js app, and uploaded files are stored on local disk under public/uploads.)
 
 # Check URLs
 check_url "Next.js Frontend" "$FRONTEND_URL" "200"
-check_url "Directus CMS" "$CMS_URL/server/info" "200"
-check_url "MinIO" "$MINIO_URL/minio/health/live" "200"
 
 # Check PostgreSQL
 if sudo systemctl is-active --quiet postgresql; then

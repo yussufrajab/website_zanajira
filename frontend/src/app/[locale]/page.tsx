@@ -1,11 +1,11 @@
 import { setRequestLocale } from "next-intl/server";
 import { HeroSlideshow } from "@/components/sections/HeroSlideshow";
-import { fetchItems } from "@/lib/directus";
 import { VacancySummary } from "@/components/sections/VacancySummary";
 import { NewsSummary } from "@/components/sections/NewsSummary";
 import { InterviewSummary } from "@/components/sections/InterviewSummary";
 import type { Vacancy, NewsItem, Interview, NewsCategory } from "@/types";
-import { Locale } from "@/lib/directus";
+import { Locale } from "@/lib/locale";
+import { listNews, listVacancies, listInterviews, listNewsCategories } from "@/lib/content";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,39 +22,25 @@ export default async function HomePage({ params }: Props) {
   let interviews: Interview[] = [];
 
   try {
-    vacancies = await fetchItems("vacancies", {
-      filter: { status: { _eq: "published" } },
-      sort: ["-date_posted"],
-      limit: 5,
-    }) as Vacancy[];
+    vacancies = await listVacancies({ limit: 5 });
   } catch {
     vacancies = [];
   }
 
   try {
-    categories = await fetchItems("news_categories", {
-      limit: 50,
-    }) as NewsCategory[];
+    categories = await listNewsCategories();
   } catch {
     categories = [];
   }
 
   try {
-    newsItems = await fetchItems("news", {
-      filter: { status: { _eq: "published" } },
-      sort: ["-date_published"],
-      limit: 6,
-    }) as NewsItem[];
+    newsItems = await listNews({ limit: 6 });
   } catch {
     newsItems = [];
   }
 
   try {
-    interviews = await fetchItems("interviews", {
-      filter: { status: { _eq: "published" } },
-      sort: ["-date_posted"],
-      limit: 5,
-    }) as Interview[];
+    interviews = await listInterviews({ limit: 5 });
   } catch {
     interviews = [];
   }

@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
-import { fetchItems, getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 import { formatDate } from "@/lib/utils";
 import type { NewsItem, NewsCategory } from "@/types";
+import { getNewsBySlug, listNewsCategories } from "@/lib/content";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -17,14 +18,8 @@ export default async function NewsDetailPage({ params }: Props) {
   const t = await getTranslations();
 
   let article: NewsItem | null = null;
-  let categories: NewsCategory[] = [];
-
   try {
-    const items = await fetchItems("news", {
-      filter: { slug: { _eq: slug } },
-      limit: 1,
-    }) as NewsItem[];
-    article = items.length > 0 ? items[0] : null;
+    article = await getNewsBySlug(slug);
   } catch {
     article = null;
   }
@@ -33,8 +28,9 @@ export default async function NewsDetailPage({ params }: Props) {
     notFound();
   }
 
+  let categories: NewsCategory[] = [];
   try {
-    categories = await fetchItems("news_categories", { limit: 50 }) as NewsCategory[];
+    categories = await listNewsCategories();
   } catch {
     categories = [];
   }
@@ -76,7 +72,7 @@ export default async function NewsDetailPage({ params }: Props) {
         {article.pdf_document && (
           <div className="mt-8 p-4 bg-primary/10 rounded-lg">
             <a
-              href={`${PUBLIC_DIRECTUS_URL}/assets/${article.pdf_document}`}
+              href={article.pdf_document}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark no-underline"

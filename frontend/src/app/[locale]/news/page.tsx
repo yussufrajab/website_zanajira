@@ -1,9 +1,9 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
-import { fetchItems } from "@/lib/directus";
-import { getLocalizedField, Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 import { formatDate } from "@/lib/utils";
 import type { NewsItem, NewsCategory } from "@/types";
+import { listNews, listNewsCategories } from "@/lib/content";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,21 +22,16 @@ export default async function NewsPage({ params, searchParams }: Props) {
   let categories: NewsCategory[] = [];
 
   try {
-    categories = await fetchItems("news_categories", { limit: 50 }) as NewsCategory[];
+    categories = await listNewsCategories();
   } catch {
     categories = [];
   }
 
   try {
-    const query: Record<string, unknown> = {
-      filter: { status: { _eq: "published" } },
-      sort: ["-date_published"],
+    newsItems = await listNews({
+      categoryId: filters.category ? Number(filters.category) : undefined,
       limit: 50,
-    };
-    if (filters.category) {
-      query.filter = Object.assign({}, query.filter as Record<string, unknown>, { category: { _eq: Number(filters.category) } });
-    }
-    newsItems = await fetchItems("news", query) as NewsItem[];
+    });
   } catch {
     newsItems = [];
   }

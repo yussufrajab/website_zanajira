@@ -6,12 +6,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:migrate": "prisma migrate dev",
+    "seed:admin": "tsx scripts/seed-admin.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@directus/sdk": "^21.3.0",
+    "@google/generative-ai": "^0.24.1",
     "@hookform/resolvers": "^5.2.2",
+    "@prisma/client": "^6.4.1",
+    "@tiptap/pm": "^2.11.0",
+    "@tiptap/react": "^2.11.0",
+    "@tiptap/starter-kit": "^2.11.0",
+    "argon2": "^0.41.1",
     "clsx": "^2.1.1",
+    "isomorphic-dompurify": "^2.4.0",
+    "jose": "^6.0.10",
     "lucide-react": "^1.14.0",
     "next": "16.2.5",
     "next-intl": "^4.11.0",
@@ -38,7 +51,9 @@
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
+    "prisma": "^6.4.1",
     "tailwindcss": "^4",
+    "tsx": "^4.19.3",
     "typescript": "^5",
     "vitest": "^4.1.5"
   }

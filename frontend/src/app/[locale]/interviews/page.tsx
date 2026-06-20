@@ -1,9 +1,10 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Badge } from "@/components/ui/Badge";
-import { fetchItems, getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 import { formatDate } from "@/lib/utils";
 import type { Interview } from "@/types";
+import { listInterviews } from "@/lib/content";
 
 const interviewTypeLabels: Record<string, { sw: string; en: string }> = {
   written: { sw: "Andishi", en: "Written" },
@@ -27,11 +28,7 @@ export default async function InterviewsPage({ params, searchParams }: Props) {
 
   let interviews: Interview[] = [];
   try {
-    interviews = await fetchItems("interviews", {
-      filter: { status: { _eq: "published" } },
-      sort: ["-date_posted"],
-      limit: 50,
-    }) as Interview[];
+    interviews = await listInterviews({ limit: 50 });
   } catch {
     interviews = [];
   }
@@ -115,7 +112,7 @@ export default async function InterviewsPage({ params, searchParams }: Props) {
                   <div className="flex items-center gap-3 shrink-0">
                     {item.pdf_document && (
                       <a
-                        href={`${PUBLIC_DIRECTUS_URL}/assets/${item.pdf_document}`}
+                        href={item.pdf_document}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline"

@@ -24,6 +24,10 @@ mkdir -p "$BACKUP_DIR"
 echo "[$(date)] Starting PostgreSQL backup..."
 
 # Run pg_dump
+# NOTE: Directus tables (directus_*) have been dropped from the schema; we no
+# longer need to exclude them. A plain pg_dump of the tume_cms database now
+# backs up the application tables (news, vacancies, interviews, contact_submissions,
+# admin_users, assets, news_categories, legacy_urls).
 pg_dump -U "$DB_USER" -d "$DB_NAME" | gzip > "$BACKUP_FILE"
 
 # Verify backup

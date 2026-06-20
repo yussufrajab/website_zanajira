@@ -1,0 +1,183 @@
+// Prisma schema for Tume ya Utumishi Serikalini
+// Adopted from the existing Directus-managed PostgreSQL tables (see
+// docs/DIRECTUS_TO_NEXTJS_API_MIGRATION_PLAN.md). The `directus_*` system
+// tables are intentionally NOT modelled here — Prisma leaves them alone so
+// they can be dropped in a follow-up once Directus is decommissioned.
+//
+// File-asset columns (`*_image`, `pdf_document`) previously held FK
+// constraints to `directus_files(id)`. Those constraints were dropped during
+// migration so the columns are now free-form asset identifiers (UUIDs or
+// storage keys) resolved by `src/lib/assets.ts`.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum NewsStatus {
+  draft
+  published
+  archived
+}
+
+enum VacancyStatus {
+  draft
+  published
+  closed
+}
+
+enum InterviewStatus {
+  draft
+  published
+}
+
+enum InterviewType {
+  written
+  face_to_face
+  practical
+  screening
+}
+
+enum ContactStatus {
+  new
+  replied
+  closed
+}
+
+enum LegacyCollection {
+  news
+  vacancies
+  interviews
+  pages
+  pdf
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("admin_users")
+}
+
+model News {
+  id            Int        @id @default(autoincrement())
+  status        NewsStatus @default(draft)
+  sort          Int?
+  dateCreated   DateTime?  @map("date_created")
+  dateUpdated   DateTime?  @map("date_updated")
+  titleEn       String     @map("title_en")
+  titleSw       String?    @map("title_sw")
+  slug          String
+  excerptEn     String?    @map("excerpt_en")
+  excerptSw     String?    @map("excerpt_sw")
+  bodyEn        String?    @map("body_en")
+  bodySw        String?    @map("body_sw")
+  categoryId    Int?       @map("category")
+  category      NewsCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  datePublished DateTime?  @map("date_published")
+  featuredImage String?    @map("featured_image")
+  pdfDocument   String?    @map("pdf_document")
+
+  @@index([categoryId])
+  @@index([status, datePublished])
+  @@map("news")
+}
+
+model NewsCategory {
+  id     Int     @id @default(autoincrement())
+  sort   Int?
+  nameEn String  @map("name_en")
+  nameSw String? @map("name_sw")
+  slug   String
+  news   News[]
+
+  @@map("news_categories")
+}
+
+model Vacancy {
+  id            Int           @id @default(autoincrement())
+  status        VacancyStatus @default(draft)
+  sort          Int?
+  dateCreated   DateTime?     @map("date_created")
+  dateUpdated   DateTime?     @map("date_updated")
+  titleEn       String        @map("title_en")
+  titleSw       String?       @map("title_sw")
+  slug          String
+  institutionEn String?       @map("institution_en")
+  institutionSw String?       @map("institution_sw")
+  descriptionEn String?       @map("description_en")
+  descriptionSw String?       @map("description_sw")
+  deadlineDate  DateTime?     @map("deadline_date")
+  pdfDocument   String?       @map("pdf_document")
+  datePosted    DateTime?     @map("date_posted")
+
+  @@index([status, datePosted])
+  @@map("vacancies")
+}
+
+model Interview {
+  id            Int             @id @default(autoincrement())
+  status        InterviewStatus @default(draft)
+  sort          Int?
+  dateCreated   DateTime?       @map("date_created")
+  dateUpdated   DateTime?       @map("date_updated")
+  titleEn       String          @map("title_en")
+  titleSw       String?         @map("title_sw")
+  slug          String
+  interviewType InterviewType   @default(written) @map("interview_type")
+  institutionEn String?         @map("institution_en")
+  institutionSw String?         @map("institution_sw")
+  descriptionEn String?         @map("description_en")
+  descriptionSw String?         @map("description_sw")
+  datePosted    DateTime?       @map("date_posted")
+  pdfDocument   String?         @map("pdf_document")
+
+  @@index([status, datePosted])
+  @@map("interviews")
+}
+
+model ContactSubmission {
+  id           Int            @id @default(autoincrement())
+  fullName     String?        @map("full_name")
+  email        String?
+  subject      String?
+  message      String?
+  isRead       Boolean?       @default(false) @map("is_read")
+  createdAt    DateTime?      @default(now()) @map("created_at")
+  status       ContactStatus? @default(new)
+  replyMessage String?        @map("reply_message")
+  replySentAt  DateTime?      @map("reply_sent_at")
+
+  @@index([status])
+  @@map("contact_submissions")
+}
+
+model Asset {
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique
+  filename   String
+  mimeType   String   @map("mime_type")
+  size       Int
+  storageKey String   @map("storage_key")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("assets")
+}
+
+model LegacyUrl {
+  id            Int               @id @default(autoincrement())
+  oldId         String            @map("old_id")
+  newUrl        String            @map("new_url")
+  collectionName LegacyCollection? @map("collection_name")
+
+  @@index([oldId])
+  @@map("legacy_urls")
+}

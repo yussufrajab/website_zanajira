@@ -4,8 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { HeroSlide } from "@/types";
-import { getLocalizedField } from "@/lib/directus";
-import { Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 
 type Props = {
   slides: HeroSlide[];

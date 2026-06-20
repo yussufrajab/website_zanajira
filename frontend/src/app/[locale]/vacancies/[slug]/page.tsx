@@ -2,9 +2,10 @@ import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Badge } from "@/components/ui/Badge";
-import { fetchItems, getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 import { formatDate } from "@/lib/utils";
 import type { Vacancy } from "@/types";
+import { getVacancyBySlug } from "@/lib/content";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -19,11 +20,7 @@ export default async function VacancyDetailPage({ params }: Props) {
 
   let vacancy: Vacancy | null = null;
   try {
-    const items = await fetchItems("vacancies", {
-      filter: { slug: { _eq: slug } },
-      limit: 1,
-    }) as Vacancy[];
-    vacancy = items.length > 0 ? items[0] : null;
+    vacancy = await getVacancyBySlug(slug);
   } catch {
     vacancy = null;
   }
@@ -80,7 +77,7 @@ export default async function VacancyDetailPage({ params }: Props) {
         {vacancy.pdf_document && (
           <div className="mt-8 p-4 bg-primary/10 rounded-lg">
             <a
-              href={`${PUBLIC_DIRECTUS_URL}/assets/${vacancy.pdf_document}`}
+              href={vacancy.pdf_document}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark no-underline"

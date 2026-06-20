@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { Page } from "@/types";
-import { getLocalizedField, Locale } from "@/lib/directus";
+import { getLocalizedField, Locale } from "@/lib/locale";
 
 type Props = {
   page: Page | null;

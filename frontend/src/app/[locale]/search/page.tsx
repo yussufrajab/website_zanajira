@@ -1,9 +1,10 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Badge } from "@/components/ui/Badge";
-import { fetchItems, getLocalizedField, PUBLIC_DIRECTUS_URL, Locale } from "@/lib/directus";
-import { formatDate, matchesSearch } from "@/lib/utils";
+import { getLocalizedField, Locale } from "@/lib/locale";
+import { formatDate } from "@/lib/utils";
 import type { NewsItem, Vacancy, Interview } from "@/types";
+import { searchPublished } from "@/lib/content";
 
 const interviewTypeLabels: Record<string, { sw: string; en: string }> = {
   written: { sw: "Andishi", en: "Written" },
@@ -25,7 +26,6 @@ export default async function SearchPage({ params, searchParams }: Props) {
 
   const t = await getTranslations();
   const query = q || "";
-  const lowerQuery = query.toLowerCase();
 
   let newsResults: NewsItem[] = [];
   let vacancyResults: Vacancy[] = [];
@@ -33,60 +33,12 @@ export default async function SearchPage({ params, searchParams }: Props) {
 
   if (query) {
     try {
-      const allNews = await fetchItems("news", {
-        filter: { status: { _eq: "published" } },
-        sort: ["-date_published"],
-        limit: 50,
-      }) as NewsItem[];
-      newsResults = allNews.filter(
-        (n) =>
-          matchesSearch(n.title_en, lowerQuery) ||
-          matchesSearch(n.title_sw, lowerQuery) ||
-          matchesSearch(n.excerpt_en, lowerQuery) ||
-          matchesSearch(n.excerpt_sw, lowerQuery) ||
-          matchesSearch(n.body_en, lowerQuery) ||
-          matchesSearch(n.body_sw, lowerQuery)
-      );
+      const r = await searchPublished(query);
+      newsResults = r.news;
+      vacancyResults = r.vacancies;
+      interviewResults = r.interviews;
     } catch {
-      newsResults = [];
-    }
-
-    try {
-      const allVacancies = await fetchItems("vacancies", {
-        filter: { status: { _eq: "published" } },
-        sort: ["-date_posted"],
-        limit: 50,
-      }) as Vacancy[];
-      vacancyResults = allVacancies.filter(
-        (v) =>
-          matchesSearch(v.title_en, lowerQuery) ||
-          matchesSearch(v.title_sw, lowerQuery) ||
-          matchesSearch(v.institution_en, lowerQuery) ||
-          matchesSearch(v.institution_sw, lowerQuery) ||
-          matchesSearch(v.description_en, lowerQuery) ||
-          matchesSearch(v.description_sw, lowerQuery)
-      );
-    } catch {
-      vacancyResults = [];
-    }
-
-    try {
-      const allInterviews = await fetchItems("interviews", {
-        filter: { status: { _eq: "published" } },
-        sort: ["-date_posted"],
-        limit: 50,
-      }) as Interview[];
-      interviewResults = allInterviews.filter(
-        (i) =>
-          matchesSearch(i.title_en, lowerQuery) ||
-          matchesSearch(i.title_sw, lowerQuery) ||
-          matchesSearch(i.institution_en, lowerQuery) ||
-          matchesSearch(i.institution_sw, lowerQuery) ||
-          matchesSearch(i.description_en, lowerQuery) ||
-          matchesSearch(i.description_sw, lowerQuery)
-      );
-    } catch {
-      interviewResults = [];
+      // leave empty
     }
   }
 
@@ -204,7 +156,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
                       <div className="flex items-center gap-3 shrink-0">
                         {item.pdf_document && (
                           <a
-                            href={`${PUBLIC_DIRECTUS_URL}/assets/${item.pdf_document}`}
+                            href={item.pdf_document}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline"
@@ -253,7 +205,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
                         <div className="flex items-center gap-3 shrink-0">
                           {item.pdf_document && (
                             <a
-                              href={`${PUBLIC_DIRECTUS_URL}/assets/${item.pdf_document}`}
+                              href={item.pdf_document}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline"

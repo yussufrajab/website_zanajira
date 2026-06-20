@@ -1,5 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Locale } from "@/lib/directus";
+import { Locale } from "@/lib/locale";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 
 type Props = {

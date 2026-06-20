@@ -3,7 +3,9 @@
 # =============================================================================
 # Tume ya Utumishi Serikalini — Service Manager
 # =============================================================================
-# Manages: PostgreSQL, MinIO, Directus CMS, Next.js Frontend
+# Manages: PostgreSQL, Next.js Frontend (admin UI + JSON API now served by Next.js)
+# Directus CMS and MinIO have been decommissioned — see
+# /docs/DIRECTUS_TO_NEXTJS_API_MIGRATION_PLAN.md for the migration notes.
 # Supports dev and production modes
 # =============================================================================
 
@@ -216,14 +218,14 @@ start_infra() {
     local failures=0
 
     start_postgres || failures=$((failures + 1))
-    start_minio || failures=$((failures + 1))
+    # MinIO has been decommissioned — uploads now live on local disk under
+    # frontend/public/uploads, served directly by Next.js.
 
     return $failures
 }
 
 stop_infra() {
     log_info "Stopping infrastructure services..."
-    stop_minio
     stop_postgres
 }
 
@@ -384,62 +386,33 @@ is_minio_running() {
 }
 
 # =============================================================================
-# DIRECTUS CMS
+# DIRECTUS CMS — DECOMMISSIONED
 # =============================================================================
+# The admin UI and JSON API are now served by the Next.js frontend itself
+# (see /docs/DIRECTUS_TO_NEXTJS_API_MIGRATION_PLAN.md). The functions below are
+# kept as no-ops so older callers of `./manage.sh start cms` etc. do not break,
+# but they no longer start or stop anything.
 
 is_cms_running() {
-    port_is_open "$CMS_PORT"
+    # No CMS process exists anymore.
+    return 1
 }
 
 start_cms() {
-    log_info "Starting Directus CMS on port $CMS_PORT [$(mode_label)]..."
-
-    ensure_port_free "$CMS_PORT" "CMS"
-    [ $? -ne 0 ] && return 1
-
-    # Verify dependencies
-    if ! is_postgres_running; then
-        log_error "PostgreSQL is not running. Start it first: ./manage.sh start postgres"
-        return 1
-    fi
-
-    mkdir -p "$LOG_DIR"
-
-    if is_dev; then
-        cd "$APP_DIR/cms"
-        nohup npx directus start > "$CMS_LOG" 2>&1 < /dev/null &
-        disown
-    else
-        # Production: use PM2 if available
-        if command -v pm2 &>/dev/null; then
-            cd "$APP_DIR"
-            pm2 start "npx directus start" --name tume-cms --cwd "$APP_DIR/cms"
-        else
-            cd "$APP_DIR/cms"
-            NODE_ENV=production nohup npx directus start > "$CMS_LOG" 2>&1 < /dev/null &
-            disown
-        fi
-    fi
-
-    wait_for_port "$CMS_PORT" "Directus CMS" 30
+    log_warning "Directus CMS has been decommissioned — admin UI is now at http://localhost:$FRONTEND_PORT/admin"
+    return 0
 }
 
 stop_cms() {
-    log_info "Stopping Directus CMS..."
-    if command -v pm2 &>/dev/null && pm2 describe tume-cms >/dev/null 2>&1; then
-        pm2 stop tume-cms 2>/dev/null
-        pm2 delete tume-cms 2>/dev/null
-    fi
-    pkill -f "directus start" 2>/dev/null
-    kill_port "$CMS_PORT" "CMS"
-    log_success "Directus CMS stopped"
+    log_info "Directus CMS: nothing to stop (decommissioned)"
+    # Clean up any leftover Directus process from a previous install, if present.
+    pkill -f "directus start" 2>/dev/null || true
+    return 0
 }
 
 restart_cms() {
-    log_info "Restarting Directus CMS..."
-    stop_cms
-    sleep 1
-    start_cms
+    log_warning "Directus CMS has been decommissioned — restart is a no-op"
+    return 0
 }
 
 # =============================================================================
@@ -580,22 +553,17 @@ start_prod_all() {
         result=1
     fi
 
-    if is_minio_running; then
-        echo -e "  ${GREEN}● MinIO${NC}       port $MINIO_PORT  bucket: $MINIO_BUCKET"
-    else
-        echo -e "  ${RED}● MinIO${NC}       NOT RUNNING"
-        result=1
-    fi
+    # MinIO and Directus CMS have been decommissioned.
 
     if [ $cms_result -eq 0 ]; then
-        echo -e "  ${GREEN}● CMS${NC}         port $CMS_PORT  http://localhost:$CMS_PORT/admin"
+        echo -e "  ${GREEN}● Admin (Next.js)${NC}  served by Frontend below"
     else
-        echo -e "  ${RED}● CMS${NC}         FAILED TO START"
+        echo -e "  ${RED}● Admin${NC}         FAILED TO START"
         result=1
     fi
 
     if [ $fe_result -eq 0 ]; then
-        echo -e "  ${GREEN}● Frontend${NC}    port $FRONTEND_PORT  http://localhost:$FRONTEND_PORT"
+        echo -e "  ${GREEN}● Frontend${NC}    port $FRONTEND_PORT  http://localhost:$FRONTEND_PORT  (admin: /admin)"
     else
         echo -e "  ${RED}● Frontend${NC}    FAILED TO START"
         result=1
@@ -723,22 +691,17 @@ start_all() {
         result=1
     fi
 
-    if is_minio_running; then
-        echo -e "  ${GREEN}● MinIO${NC}       port $MINIO_PORT  bucket: $MINIO_BUCKET"
-    else
-        echo -e "  ${RED}● MinIO${NC}       NOT RUNNING"
-        result=1
-    fi
+    # MinIO and Directus CMS have been decommissioned.
 
     if [ $cms_result -eq 0 ]; then
-        echo -e "  ${GREEN}● CMS${NC}         port $CMS_PORT  http://localhost:$CMS_PORT/admin"
+        echo -e "  ${GREEN}● Admin (Next.js)${NC}  served by Frontend below"
     else
-        echo -e "  ${RED}● CMS${NC}         FAILED TO START"
+        echo -e "  ${RED}● Admin${NC}         FAILED TO START"
         result=1
     fi
 
     if [ $fe_result -eq 0 ]; then
-        echo -e "  ${GREEN}● Frontend${NC}    port $FRONTEND_PORT  http://localhost:$FRONTEND_PORT"
+        echo -e "  ${GREEN}● Frontend${NC}    port $FRONTEND_PORT  http://localhost:$FRONTEND_PORT  (admin: /admin)"
     else
         echo -e "  ${RED}● Frontend${NC}    FAILED TO START"
         result=1
@@ -814,13 +777,11 @@ check_status() {
     echo -e "  ${BOLD}Infrastructure${NC}"
     echo -e "  ${CYAN}─────────────────────────────────────────────${NC}"
     _systemd_status_line "PostgreSQL " "postgresql" "$POSTGRES_PORT" "db: $DB_NAME"
-    _systemd_status_line "MinIO      " "minio" "$MINIO_PORT" "bucket: $MINIO_BUCKET"
 
     echo ""
     echo -e "  ${BOLD}Application${NC}"
     echo -e "  ${CYAN}─────────────────────────────────────────────${NC}"
-    _service_status_line "CMS        " "$CMS_PORT" "http://localhost:$CMS_PORT/admin"
-    _service_status_line "Frontend   " "$FRONTEND_PORT" "http://localhost:$FRONTEND_PORT"
+    _service_status_line "Frontend   " "$FRONTEND_PORT" "http://localhost:$FRONTEND_PORT  (admin UI at /admin)"
 
     echo ""
 }
@@ -903,17 +864,13 @@ tail_logs() {
 # =============================================================================
 
 db_migrate() {
-    log_info "Running Directus migrations..."
-    cd "$APP_DIR/cms"
-    node migrations/001_initial_schema.js
-    log_success "Migrations complete"
+    log_warning "Directus migrations are no longer used. Apply schema changes via Prisma instead:"
+    log_info "  cd frontend && npx prisma db push"
 }
 
 db_seed() {
-    log_info "Seeding database..."
-    cd "$APP_DIR/cms"
-    node seed/seed-data.js
-    log_success "Database seeded"
+    log_warning "Directus seed is no longer used. Create an admin user with the seed-admin script:"
+    log_info "  cd frontend && DATABASE_URL=\"\$DATABASE_URL\" npx tsx scripts/seed-admin.ts --email admin@tume.go.tz --password 'ChangeMe!2026'"
 }
 
 db_backup() {
@@ -965,19 +922,9 @@ db_restore() {
 }
 
 db_reset() {
-    log_warning "This will DELETE ALL DATA from database '$DB_NAME'!"
-    read -p "Are you sure? (y/N): " confirm
-    if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
-        log_info "Dropping and recreating database '$DB_NAME'..."
-        PGPASSWORD="$DB_PASS" psql -U "$DB_USER" -h localhost -p "$POSTGRES_PORT" -d postgres -c "DROP DATABASE \"$DB_NAME\";" 2>/dev/null || true
-        PGPASSWORD="$DB_PASS" psql -U "$DB_USER" -h localhost -p "$POSTGRES_PORT" -d postgres -c "CREATE DATABASE \"$DB_NAME\";"
-        log_info "Running migrations..."
-        cd "$APP_DIR/cms"
-        node migrations/001_initial_schema.js
-        log_success "Database reset"
-    else
-        log_info "Cancelled"
-    fi
+    log_warning "This would DELETE ALL DATA from database '$DB_NAME'!"
+    log_warning "The Directus-based db-reset flow is no longer supported."
+    log_info "If you need to recreate the schema, use Prisma: cd frontend && npx prisma db push --accept-data-loss"
 }
 
 # =============================================================================
@@ -995,9 +942,7 @@ install_deps() {
     log_info "Installing frontend dependencies..."
     cd "$APP_DIR/frontend"
     npm install
-    log_info "Installing CMS dependencies..."
-    cd "$APP_DIR/cms"
-    npm install
+    # Directus CMS (cms/) has been decommissioned — its deps are no longer installed.
     log_success "Dependencies installed"
 }
 
@@ -1013,7 +958,7 @@ health_check() {
     echo ""
 
     # Check each service port
-    for svc in "PostgreSQL:$POSTGRES_PORT" "MinIO:$MINIO_PORT" "CMS:$CMS_PORT" "Frontend:$FRONTEND_PORT"; do
+    for svc in "PostgreSQL:$POSTGRES_PORT" "Frontend:$FRONTEND_PORT"; do
         local name="${svc%%:*}"
         local port="${svc##*:}"
         if port_is_open "$port"; then
@@ -1025,26 +970,10 @@ health_check() {
 
     # HTTP health checks
     echo ""
-    if http_responds "$CMS_PORT"; then
-        echo -e "  ${GREEN}● CMS /admin${NC} — responding"
-    else
-        echo -e "  ${RED}● CMS /admin${NC} — not responding"
-    fi
-
     if http_responds "$FRONTEND_PORT"; then
         echo -e "  ${GREEN}● Frontend${NC} — responding"
     else
         echo -e "  ${RED}● Frontend${NC} — not responding"
-    fi
-
-    # MinIO health
-    echo ""
-    local minio_health
-    minio_health=$(curl -s -o /dev/null -w "%{http_code}" --max-time 3 "http://localhost:$MINIO_PORT/minio/health/live" 2>/dev/null)
-    if [ "$minio_health" = "200" ] || [ "$minio_health" = "204" ]; then
-        echo -e "  ${GREEN}● MinIO health${NC} — healthy"
-    else
-        echo -e "  ${RED}● MinIO health${NC} — not responding"
     fi
 
     echo ""
@@ -1078,7 +1007,7 @@ show_help() {
     echo "    all          All services (default)"
     echo "    postgres     PostgreSQL database"
     echo "    minio        MinIO object storage"
-    echo "    infra        Infrastructure only (postgres + minio)"
+    echo "    infra        Infrastructure only (postgres)"
     echo "    cms          Directus CMS"
     echo "    frontend     Next.js frontend"
     echo ""
